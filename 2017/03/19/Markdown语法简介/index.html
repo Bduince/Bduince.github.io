@@ -3,19 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Test | Bduince&#39;s Blog</title>
+  <title>Markdown语法简介 | Bduince&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="hexo" />
   
   
   
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Test">
-<meta property="og:url" content="http://yoursite.com/2017/03/18/Test/index.html">
+  
+  <meta name="description" content="本文旨在方便自己以后忘了怎么用markdown写东西时查阅，内容参考自网络。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown语法简介">
+<meta property="og:url" content="http://yoursite.com/2017/03/19/Markdown语法简介/index.html">
 <meta property="og:site_name" content="Bduince's Blog">
-<meta property="og:updated_time" content="2017-03-18T11:29:40.768Z">
+<meta property="og:description" content="本文旨在方便自己以后忘了怎么用markdown写东西时查阅，内容参考自网络。">
+<meta property="og:image" content="http://yoursite.com/2017/03/19/Markdown语法简介/title-2017-3-19.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/03/19/Markdown语法简介/atx_title_20170319.jpg">
+<meta property="og:updated_time" content="2017-03-19T08:19:18.047Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Test">
+<meta name="twitter:title" content="Markdown语法简介">
+<meta name="twitter:description" content="本文旨在方便自己以后忘了怎么用markdown写东西时查阅，内容参考自网络。">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/19/Markdown语法简介/title-2017-3-19.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Bduince&#39;s Blog" type="application/atom+xml">
   
@@ -78,7 +86,7 @@
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Kategorien</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Categories</a> </li>
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
                     
@@ -98,7 +106,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-Test" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Markdown语法简介" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -106,7 +114,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Test
+      Markdown语法简介
     </h1>
   
 
@@ -114,26 +122,44 @@
     
     <div class="article-meta">
       
-	<a href="/2017/03/18/Test/" class="article-date">
-	  <time datetime="2017-03-18T11:29:40.000Z" itemprop="datePublished">March 18, 2017</time>
+	<a href="/2017/03/19/Markdown语法简介/" class="article-date">
+	  <time datetime="2017-03-19T04:02:47.172Z" itemprop="datePublished">March 19, 2017</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p></p><p><br>    本文旨在方便自己以后忘了怎么用markdown写东西时查阅，内容参考自网络。<br></p><br><a id="more"></a><p></p>
+<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><hr>
+<p>标题的语法有<code>Setext</code>和<code>Atx</code>两种形式。<br><code>Settxt</code>是用底线表示的形式，利用<code>=</code>和<code>-</code>区分最高阶标题和第二阶标题。</p>
+<p><img src="/2017/03/19/Markdown语法简介/title-2017-3-19.jpg" alt="Settext"><br><br>而<code>Atx</code>则是用<code>#</code>给标题分级，有几个<code>#</code>就是几级。</p>
+<p><img src="/2017/03/19/Markdown语法简介/atx_title_20170319.jpg" alt="Atx"><br></p><p></p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><hr>
+<blockquote>
+<p>通过在段前增加<code>&lt;</code>来实现，在引用区域中同样可以使用Markdown其他语法</p>
+</blockquote>
+<h1 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h1><hr>
+<p>将<code>_config</code>文件中的<code>post_asset_folder</code>一项的属性设置为<code>true</code>，这样一来在我们创建新的帖子时在<code>source</code>目录下会创建一个同名的文件夹，只需要将图片放入其中，然后使用<br><br><code>！[自定义图片名]（同名文件夹/图片名.jpg）</code><br>就可以将图片插入了。使用这种方法首先需要通过<br><code>npm install https://github.com/CodeFalling/hexo-asset-image --save</code><br>下载插件。</p>
+<p><a href="https://hexo.io/zh-cn/docs/asset-folders.html#相对路径引用的标签插件" target="_blank" rel="external">另一种方法</a></p>
+<h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><hr>
+<p>一共有两种表达方式：</p>
+<p>第一种是形如<code>[连接名][连接地址]</code><br>第二种是形如<code>[连接名][变量名]</code>，然后在post中任意位置加上变量赋值<code>[变量名]: 链接地址</code></p>
+
       
     </div>
     <footer class="entry-meta entry-footer">
       
       
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
       
         
 	<div id="comment">
 	
 	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/2017/03/18/Test/" data-title="Test" data-url="http://yoursite.com/2017/03/18/Test/"></div>
+	 <div class="ds-thread" data-thread-key="/2017/03/19/Markdown语法简介/" data-title="Markdown语法简介" data-url="http://yoursite.com/2017/03/19/Markdown语法简介/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -163,7 +189,7 @@
   
   
     <a href="/2017/03/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Hello World</div>
     </a>
   
@@ -178,7 +204,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav">None</ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#标题"><span class="nav-number">1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用"><span class="nav-number">2.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图片"><span class="nav-number">3.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接"><span class="nav-number">4.</span> <span class="nav-text">连接</span></a></li></ol>
     
     </div>
   </aside>
