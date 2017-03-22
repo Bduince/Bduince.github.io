@@ -99,6 +99,59 @@
         
           <section id="main">
   
+    <article id="post-PAT"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/03/22/PAT/">PAT 1003</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/03/22/PAT/" class="article-date">
+	  <time datetime="2017-03-22T12:18:21.000Z" itemprop="datePublished">March 22, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+          
+          <div class="entry-summary">
+          题目As an emergency rescue team leader of a city, you are given a special map of your country. The map shows several scattered cities connected by some roads. Amount of rescue teams in each city and the length of each road between any pair of cities are marked on the map. When there is an
+
+        
+          <p class="article-more-link">
+            <a href="/2017/03/22/PAT/#more">Continue Reading →</a>
+          </p>
+        </div>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-动态规划"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -123,34 +176,18 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h1><hr>
-<p>将原问题拆分为子问题，解决子问题后，组合解决原问题。</p>
-<p>为了方便理解，举例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">约束：  已知每个宝箱中可以获得的钥匙数量</div><div class="line">       已知开启宝箱需要耗费的钥匙数量</div><div class="line">原问题：现在有10个箱子和20把万能钥匙，问最多可以得到多少枚金币。</div></pre></td></tr></table></figure></p>
-<p>我们当然可以用穷举的方法找出可以获得的金币的最大数量，但这样一来，每个箱子有2种状态（打开和不打开），一共有10个箱子，则最多需要2^10次计算，算法的时间复杂度为O(2^n)。</p>
-<p>让我们换一种思路，每个箱子有打开和不打开两种状态，那么只要考虑“打开第一个箱子后，最多可以获得多少金币”与“不打开第一个箱子，最多可以获得多少金币”这两种情况，很明显其中金币数较多的那个就是我们需要的方案。假设开启第一个箱子需要3把万能钥匙，箱子中有5个金币，则原问题可以转化为两个一级子问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">一级子问题1：（假设开启第一个箱子）现有9个箱子和17把万能钥匙以及5个金币，问最多可获得多少金币</div><div class="line">一级子问题2：（假设不开启第一个箱子）现在有10个箱子和20把万能钥匙，问最多可获得多少金币</div></pre></td></tr></table></figure></p>
-<p>而对于子问题1，我们可以以同样的思路将之转化为两个二级子问题，我们假设打开第二个箱子需要2把钥匙，可以获得1枚金币，则一级子问题1可转化为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">二级子问题1：（假设不开启第二个箱子）现有9个箱子，17把万能钥匙，5枚金币，问最多可获得多少金币</div><div class="line">二级子问题2：（假设开启第二个箱子）现有9个箱子，15把万能钥匙，6枚金币，问最多可获得多少金币</div></pre></td></tr></table></figure></p>
-<p>可以看到，只要这两个二级子问题被解决，我们就可以解决一级子问题1，类似的，一级子问题2也可以作如上拆分。那么，这样的算法其复杂度是多少呢？可以知道，按这样拆分下去，最后一层有2^9个子问题，最终算下来复杂度还是O(2^n)，这样一来问题的规模似乎并没有被减少，这是因为当中存在大量的重复计算。比如在上面的例子中，一级子问题1和二级子问题1是相同的状态，都是9个箱子，17把万能钥匙，根本没有必要计算两遍，因此我们可以使用一个记事本，将我们算过的状态给存储下来，也就是说在碰到一级子问题1的时候我们就将这个问题记下来，而后解决二级子问题1的时候就直接从记事本中将答案取出。可以看到，通过这样的方法，最多只需要计算200次就可以找到最多的金币数量，也就是说空间复杂度从O(2^n)降低到了O(nm)。</p>
-<p>但与之相对的，空间复杂度变成了O(nm)，那么有没有什么方法可以降低算法的空间复杂度，减少存储的开销呢？<br>我们发现，是否打开第一个箱子，只需要知道打开第二个箱子最多可获得多少金币，不打开第二个箱子最多可获得多少金币，而与其他箱子是否打开无关，也就是说我们并不需要记录下所有的200次计算的结果，而只需要记录下一级的两个结果就可以了，于是可以把空间复杂度降低到O(2m)，由于常数没有意义，即降低到O(m)</p>
-<h1 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h1><hr>
-<ol>
-<li><p>无后效性<br>即这一阶段的决策对下一阶段无影响    </p>
-</li>
-<li><p>去冗余<br>或者说用空间换时间，通过一个记事簿将计算结果记录下来，减少重复计算     </p>
-<h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1></li>
-</ol>
-<hr>
-<h3 id="问题：-leetcode-62"><a href="#问题：-leetcode-62" class="headerlink" title="问题： leetcode 62"></a>问题： leetcode 62</h3><blockquote>
-<p>A robot is located at the top-left corner of a m x n grid (marked ‘Start’ in the diagram below).</p>
-<p>The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked ‘Finish’ in the diagram below).</p>
-<p>How many possible unique paths are there?</p>
-</blockquote>
-<h3 id="递归解法（暴力搜索）"><a href="#递归解法（暴力搜索）" class="headerlink" title="递归解法（暴力搜索）"></a>递归解法（暴力搜索）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int solve(int m, int n)&#123;</div><div class="line">        if(n&lt;0||m&lt;0) return 0;</div><div class="line">        if(m==0&amp;&amp;n==0) return 1;</div><div class="line">        if(m==1||n==1) return 1;</div><div class="line">       </div><div class="line">        return solve(m-1,n) + solve(m, n-1);   </div><div class="line">    &#125;</div><div class="line">    int uniquePaths(int m, int n) &#123;</div><div class="line">        return solve(m,n);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="动态规划-递归）"><a href="#动态规划-递归）" class="headerlink" title="动态规划(递归）"></a>动态规划(递归）</h3><p>经测试可知上述代码已经可以解决问题，但当棋盘较大时由于时间复杂度过大，会导致超时，于是我们增加一个记事簿将已经算过的情况记下，在碰到时跳过。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int vec[101][101];</div><div class="line">    int solve(int m, int n)&#123;</div><div class="line">        if(n&lt;0||m&lt;0) return 0;</div><div class="line">        if(m==0&amp;&amp;n==0) return 1;</div><div class="line">        if(m==1||n==1) return 1;</div><div class="line">        if(vec[m][n]&gt;0)&#123;</div><div class="line">            return vec[m][n];</div><div class="line">        &#125;</div><div class="line">        vec[m][n] = solve(m-1,n) + solve(m, n-1);</div><div class="line">        return vec[m][n];</div><div class="line">    &#125;</div><div class="line">    int uniquePaths(int m, int n) &#123;</div><div class="line">        return solve(m,n);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h3 id="动态规划-递推）"><a href="#动态规划-递推）" class="headerlink" title="动态规划(递推）"></a>动态规划(递推）</h3><p>当写出递归程序时，其实已经得到了状态转移方程，据此可以很容易地写出递推式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:   </div><div class="line">    int uniquePaths(int m, int n) &#123;</div><div class="line">        vector&lt;vector&lt;int&gt; &gt; vec(m, vector&lt;int&gt; (n, 1));</div><div class="line">     </div><div class="line">        for(int i = 1; i&lt;m; ++i)</div><div class="line">        &#123;</div><div class="line">            for(int j = 1; j &lt; n; ++j)</div><div class="line">            &#123;</div><div class="line">                vec[i][j] = vec[i-1][j] + vec[i][j-1];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return vec[m-1][n-1];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>为了进一步降低动态规划算法的空间复杂度，可以使用一些小技巧。</p>
-<h3 id="滚动数组"><a href="#滚动数组" class="headerlink" title="滚动数组"></a>滚动数组</h3><p>可以看到对于每一个状态vec[i] [j]，其结果只和vec[i-1] [j]与vec[i] [j-1]相关，即在计算时需要记录的中间结果只有这两个值，而可以省略其他结果。得到如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    </div><div class="line">    </div><div class="line">    int uniquePaths(int m, int n) &#123;</div><div class="line">        vector&lt;vector&lt;int&gt; &gt; vec(2, vector&lt;int&gt; (n, 1));</div><div class="line">     </div><div class="line">        for(int i = 1; i&lt;m; ++i)</div><div class="line">        &#123;</div><div class="line">            for(int j = 1; j &lt; n; ++j)</div><div class="line">            &#123;</div><div class="line">                vec[i%2][j] = vec[(i-1)%2][j] + vec[i%2][j-1];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return vec[(m-1)%2][n-1];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>可以看到空间复杂度降低到O(m)</p>
+        
 
+          
+          <div class="entry-summary">
+          思想
+将原问题拆分为子问题，解决子问题后，组合解决原问题。
+
+        
+          <p class="article-more-link">
+            <a href="/2017/03/19/动态规划/#more">Continue Reading →</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -208,65 +245,6 @@
     </div>
     <footer class="entry-meta entry-footer">
       
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-hello-world"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/03/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/03/18/hello-world/" class="article-date">
-	  <time datetime="2017-03-18T10:02:03.684Z" itemprop="datePublished">March 18, 2017</time>
-	</a>
-
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-
-          
-          <div class="entry-summary">
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-
-        
-          <p class="article-more-link">
-            <a href="/2017/03/18/hello-world/#more">Continue Reading →</a>
-          </p>
-        </div>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
-
       
   <span class="ico-tags"></span>
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -386,6 +364,18 @@
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2017/03/22/PAT/">PAT 1003</a></h6>
+              <span>March 22, 2017</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2017/03/19/动态规划/">动态规划入门</a></h6>
               <span>March 19, 2017</span>
             </div>
@@ -404,38 +394,19 @@
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2017/03/18/hello-world/">Hello World</a></h6>
-              <span>March 18, 2017</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li></ul>
-    </div>
-  </div>
-
 
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -445,7 +416,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+      <a href="/tags/PAT/" style="font-size: 10px;">PAT</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
     </div>
   </div>
 
